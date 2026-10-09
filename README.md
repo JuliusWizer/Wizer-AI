@@ -1,2 +1,2 @@
 # Wizer-AI
-this is my web AI
+ web Wizer AI
