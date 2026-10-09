@@ -35,7 +35,7 @@ function decodeDataUrl(dataUrl: string) {
 }
 
 async function prepareAttachments(attachments: z.infer<typeof bodySchema>["attachments"], language: string) {
-  const multimodal: Array<{ type: "image_url"; image_url: { url: string; detail?: "auto" | "low" | "high" } } | { type: "file_url"; file_url: { url: string; mime_type?: "application/pdf" | "audio/mpeg" | "audio/wav" | "audio/mp4" | "video/mp4" } }> = [];
+  const multimodal: Array<{ type: "image_url"; image_url: { url: string; detail?: "auto" | "low" | "high" } } | { type: "file_url"; file_url: { url: string; mime_type?: "application/pdf" | "audio/[...]
   const extracted: string[] = [];
   for (const attachment of attachments) {
     const decoded = decodeDataUrl(attachment.dataUrl);
@@ -115,7 +115,10 @@ export async function registerChatStream(req: Request, res: Response) {
 
     let answer = "";
     writeEvent(res, { type: "start" });
-    await streamLLM({ messages: buildChatMessages({ history, message, language: input.language, memory: buildMemoryContext(memoryRows, input.conversationId), attachments: prepared.multimodal }) }, text => {
+    await streamLLM({ 
+      model: "gpt-4o-mini",
+      messages: buildChatMessages({ history, message, language: input.language, memory: buildMemoryContext(memoryRows, input.conversationId), attachments: prepared.multimodal }) 
+    }, (text) => {
       answer += text;
       if (!finished) writeEvent(res, { type: "delta", text });
     }, controller.signal);
