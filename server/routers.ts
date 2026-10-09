@@ -121,6 +121,7 @@ export const appRouter = router({
             await db.upsertConversation({ id: input.conversationId, userId: ctx.user.id, title: input.title || input.message.slice(0, 34), messages: JSON.stringify(userMessages) });
           }
           const response = await invokeLLM({
+            model: "gpt-4o-mini",
             messages: buildChatMessages({ history, message: input.message, language: input.language, memory: buildMemoryContext(memoryRows, input.conversationId) }),
           });
 
@@ -133,7 +134,7 @@ export const appRouter = router({
 
           if (!answer) throw new Error("The AI returned an empty response.");
           if (ctx.user && input.conversationId) {
-            await db.upsertConversation({ id: input.conversationId, userId: ctx.user.id, title: input.title || input.message.slice(0, 34), messages: JSON.stringify([...userMessages, { role: "assistant", content: answer }]) });
+            await db.upsertConversation({ id: input.conversationId, userId: ctx.user.id, title: input.title || input.message.slice(0, 34), messages: JSON.stringify([...userMessages, { role: "assi[...]
           }
           return { response: answer };
         } catch (error) {
