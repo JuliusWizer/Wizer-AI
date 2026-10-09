@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1789483866429,
+      "tag": "0000_peaceful_thor_girl",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1789548771357,
+      "tag": "0001_fine_mastermind",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1790001325637,
+      "tag": "0002_abandoned_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1790318173839,
+      "tag": "0003_damp_reaper",
+      "breakpoints": true
+    }
+  ]
+}
